@@ -27,7 +27,7 @@ LDLIBS = -lft
 SRC_PATH = src
 
 SRC_NAME = \
-	malloc.c
+	malloc.c free.c realloc.c show_alloc_mem.c
 AR = ar rc
 
 INC_LIB = -I libft/include

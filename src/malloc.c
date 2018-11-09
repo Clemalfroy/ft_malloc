@@ -10,10 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include "ft_malloc.h"
 
-int		main()
+void 		*malloc(size_t size)
+{
+	(void)size;
+	return (void *)1;
+}
+
+int			main()
 {
 	return (0);
 }

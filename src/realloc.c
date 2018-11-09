@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc.h                                           :+:      :+:    :+:   */
+/*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmalfroy <cmalfroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,20 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MALLOC_H
-# define MALLOC_H
+#include "ft_malloc.h"
 
-# include <libft.h>
-# include <pthread.h>
-# include <unistd.h>
-# include <sys/mman.h>
-# include <fcntl.h>
-
-#define PAGE_SIZE getpagesize()
-
-void 		*malloc(size_t size);
-void 		*realloc(void *ptr, size_t size);
-void 		free(void *ptr);
-void		show_alloc_mem();
-
-#endif
+void 		*realloc(void *ptr, size_t size)
+{
+    (void)ptr;
+    (void)size;
+    return (void *)1;
+}
