@@ -28,7 +28,7 @@ inline int	ft_iscoolc(int c)
 inline char	*ft_toprint(int c, char *buf)
 {
 	if (!buf)
-		buf = ft_calloc(20 * sizeof(char));
+		buf = ft_caloc(20 * sizeof(char));
 	if (c == ' ')
 		ft_strcpy(buf, "<space>");
 	else if (ft_isprint(c))

@@ -43,5 +43,5 @@ inline void	*ft_memset(void *b, int c, size_t len)
 
 inline void	*ft_memdup(void const *src, size_t n)
 {
-	return (ft_memcpy(ft_malloc(n), src, n));
+	return (ft_memcpy(ft_maloc(n), src, n));
 }

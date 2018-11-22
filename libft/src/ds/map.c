@@ -72,9 +72,9 @@ static inline void	reh(t_map *self, uint32_t sz, uint8_t *bucks)
 	}
 	if (self->cap > sz)
 	{
-		self->keys = ft_realloc(self->keys, self->len * self->ksz,
+		self->keys = ft_realoc(self->keys, self->len * self->ksz,
 			sz * self->ksz);
-		self->vals = ft_realloc(self->vals, self->len * self->vsz,
+		self->vals = ft_realoc(self->vals, self->len * self->vsz,
 			sz * self->vsz);
 	}
 	free(self->bucks);
@@ -95,14 +95,14 @@ size_t				ft_maprsz(t_map *self, uint32_t sz)
 		sz = 32;
 	if (self->len >= (uint32_t)(sz * MAP_HASH_UPPER + 0.5))
 		j = 0;
-	else if ((bucks = (uint8_t *)ft_malloc(sz)))
+	else if ((bucks = (uint8_t *)ft_maloc(sz)))
 	{
 		ft_memset(bucks, BUCKET_EMPTY, sz);
 		if (self->cap < sz)
 		{
-			self->keys = ft_realloc(self->keys, self->len * self->ksz,
+			self->keys = ft_realoc(self->keys, self->len * self->ksz,
 				sz * self->ksz);
-			self->vals = ft_realloc(self->vals, self->len * self->vsz,
+			self->vals = ft_realoc(self->vals, self->len * self->vsz,
 				sz * self->vsz);
 			ft_bzero(self->vals + (self->len * self->vsz),
 				(sz * self->vsz) - (self->len * self->vsz));

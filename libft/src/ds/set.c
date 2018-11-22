@@ -65,7 +65,7 @@ static inline void	reh(t_set *self, uint32_t sz, uint8_t *bucks)
 		++j;
 	}
 	if (self->cap > sz)
-		self->keys = ft_realloc(self->keys, self->len * self->ksz,
+		self->keys = ft_realoc(self->keys, self->len * self->ksz,
 			sz * self->ksz);
 	free(self->bucks);
 	self->bucks = bucks;
@@ -87,10 +87,10 @@ size_t				ft_setrsz(t_set *self, uint32_t sz)
 		j = 0;
 	else
 	{
-		bucks = (uint8_t *)ft_malloc(sz);
+		bucks = (uint8_t *)ft_maloc(sz);
 		ft_memset(bucks, BUCKET_EMPTY, sz);
 		if (self->cap < sz)
-			self->keys = ft_realloc(self->keys, self->len * self->ksz,
+			self->keys = ft_realoc(self->keys, self->len * self->ksz,
 				sz * self->ksz);
 	}
 	if (j)

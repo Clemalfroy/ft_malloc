@@ -14,7 +14,9 @@
 
 void        show_alloc_mem()
 {
-    pthread_mutex_lock(&g_mutex);
-    //TODO: CODE HERE
-	pthread_mutex_unlock(&g_mutex);
+    if (pthread_mutex_lock(&g_mutex) != 0)
+		return ;
+	//TODO: CODE HERE
+	if (pthread_mutex_unlock(&g_mutex) != 0)
+		return ; 
 }

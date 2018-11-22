@@ -17,8 +17,11 @@
 
 int			main()
 {
-	t_block_header test;
+	t_block test;
 
-	assert(sizeof(test) == 16);
+	printf("%lu\n", sizeof(test));
+    assert(sizeof(test) == 32);
+    if (malloc(1) == NULL)
+        printf("Malloc Failed\n");
 	return (0);
 }

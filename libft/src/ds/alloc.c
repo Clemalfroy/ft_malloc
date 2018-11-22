@@ -18,7 +18,7 @@ inline size_t	ft_deqalloc(t_deq *self, size_t n)
 
 	if (self->cap == n)
 		return (self->cap);
-	buf = ft_realloc(self->buf, self->len * self->isz, n * self->isz);
+	buf = ft_realoc(self->buf, self->len * self->isz, n * self->isz);
 	self->buf = buf;
 	if (self->len > (self->cap = n))
 		self->len = n;
@@ -33,7 +33,7 @@ inline size_t	ft_sdsalloc(t_sds *self, size_t n)
 
 	if (self->cap == n)
 		return (self->cap);
-	buf = ft_realloc(self->buf, self->len, n * sizeof(char));
+	buf = ft_realoc(self->buf, self->len, n * sizeof(char));
 	self->buf = buf;
 	if (self->len > (self->cap = n))
 		self->len = n;
@@ -47,7 +47,7 @@ inline size_t	ft_vecalloc(t_vec *self, size_t n)
 
 	if (self->cap == n)
 		return (self->cap);
-	buf = ft_realloc(self->buf, self->len * self->isz, n * self->isz);
+	buf = ft_realoc(self->buf, self->len * self->isz, n * self->isz);
 	self->buf = buf;
 	if (self->len > (self->cap = n))
 		self->len = n;

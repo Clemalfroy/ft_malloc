@@ -23,7 +23,7 @@ char	*ft_itoa(int64_t n, uint8_t base)
 	if (base > 30)
 		return (NULL);
 	i = ft_intlen(n, base);
-	str = ft_malloc((i + 2) * sizeof(char));
+	str = ft_maloc((i + 2) * sizeof(char));
 	i = ft_intstr(str, n, base);
 	str[i] = '\0';
 	return (str);
@@ -37,7 +37,7 @@ char	*ft_utoa(uint64_t n, uint8_t base)
 	if (base > 30)
 		return (NULL);
 	i = ft_uintlen(n, base);
-	str = ft_malloc((i + 1) * sizeof(char));
+	str = ft_maloc((i + 1) * sizeof(char));
 	i = ft_uintstr(str, n, base);
 	str[i] = '\0';
 	return (str);

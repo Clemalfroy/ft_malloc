@@ -15,8 +15,8 @@
 
 # include "lib.h"
 
-extern void	*ft_calloc(size_t sz);
-extern void	*ft_malloc(size_t sz);
-extern void	*ft_realloc(void const *ptr, size_t psz, size_t sz);
+extern void	*ft_caloc(size_t sz);
+extern void	*ft_maloc(size_t sz);
+extern void	*ft_realoc(void const *ptr, size_t psz, size_t sz);
 
 #endif

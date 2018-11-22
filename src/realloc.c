@@ -12,12 +12,35 @@
 
 #include "ft_malloc.h"
 
+static void *ft_realloc(void *ptr, size_t size)
+{
+    t_block *block;
+
+    (void)ptr;
+    (void)size;
+    (void)block;
+    return (void *)1;
+}
+
 void 		*realloc(void *ptr, size_t size)
 {
-    if (!ptr || size < 1)
+    void *ret;
+
+    if (size < 1)
         return (NULL);
-    pthread_mutex_lock(&g_mutex);
-    //TODO: CODE HERE
-	pthread_mutex_unlock(&g_mutex);
-    return (NULL);
+    if (!ptr)
+        return (malloc(size));
+    if (size == 0)
+    {
+        free(ptr);
+        return (NULL);
+    }
+    if (pthread_mutex_lock(&g_mutex) != 0)
+		return (NULL);
+    if (!get_mem())
+		return (NULL);
+	ret = ft_realloc(ptr, size);
+	if (pthread_mutex_unlock(&g_mutex) != 0)
+		return (NULL);      
+    return (void*)1;
 }

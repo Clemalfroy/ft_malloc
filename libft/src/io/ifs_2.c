@@ -31,7 +31,7 @@ static inline ssize_t	ifsbuf(t_ifs *self, char **out)
 		ft_memmove(*out, *out + self->i, left);
 	else
 	{
-		*out = ft_memcpy(ft_malloc(self->rd + BSZ + 1), *out + self->i, left);
+		*out = ft_memcpy(ft_maloc(self->rd + BSZ + 1), *out + self->i, left);
 		self->buf ? free(self->buf) : 0;
 		self->buf = *out;
 		*out = self->buf;

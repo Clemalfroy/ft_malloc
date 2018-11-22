@@ -61,7 +61,7 @@ inline char	*ft_strndup(char const *src, size_t n)
 {
 	char	*dup;
 
-	dup = ft_malloc((n + 1) * sizeof(char));
+	dup = ft_maloc((n + 1) * sizeof(char));
 	ft_memcpy(dup, src, n);
 	dup[n] = '\0';
 	return (dup);

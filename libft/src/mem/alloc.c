@@ -15,7 +15,7 @@
 #include "libft/ex.h"
 #include "libft/str.h"
 
-inline void	*ft_malloc(size_t sz)
+inline void	*ft_maloc(size_t sz)
 {
 	void *p;
 
@@ -24,20 +24,20 @@ inline void	*ft_malloc(size_t sz)
 	return (p);
 }
 
-inline void	*ft_calloc(size_t sz)
+inline void	*ft_caloc(size_t sz)
 {
 	void *ptr;
 
-	if ((ptr = ft_malloc(sz)))
+	if ((ptr = ft_maloc(sz)))
 		ft_memset(ptr, 0, sz);
 	return (ptr);
 }
 
-inline void	*ft_realloc(void const *ptr, size_t psz, size_t sz)
+inline void	*ft_realoc(void const *ptr, size_t psz, size_t sz)
 {
 	void *p;
 
-	if (!(p = ft_malloc(sz)))
+	if (!(p = ft_maloc(sz)))
 		return (NULL);
 	if (!ptr)
 		return (p);
