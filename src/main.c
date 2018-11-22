@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmalfroy <cmalfroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,13 @@
 
 #include "ft_malloc.h"
 
-void        free(void *ptr)
+#include <stdio.h>
+#include <assert.h>
+
+int			main()
 {
-    if (!ptr)
-        return ;
-    pthread_mutex_lock(&g_mutex);
-    //TODO: CODE HERE
-	pthread_mutex_unlock(&g_mutex);
+	t_block_header test;
+
+	assert(sizeof(test) == 16);
+	return (0);
 }

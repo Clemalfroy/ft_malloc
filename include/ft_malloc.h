@@ -19,7 +19,16 @@
 # include <sys/mman.h>
 # include <fcntl.h>
 
-#define PAGE_SIZE getpagesize()
+# define TINY 32
+# define SMALL 1024
+# define PAGE_SIZE getpagesize()
+
+typedef struct	s_block_header{
+  size_t size;
+  char   allocated;
+}				t_block_header;
+
+static pthread_mutex_t	g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void 		*malloc(size_t size);
 void 		*realloc(void *ptr, size_t size);

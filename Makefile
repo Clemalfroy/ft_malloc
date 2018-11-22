@@ -26,7 +26,7 @@ LDLIBS = -lft
 
 SRC_PATH = src
 
-SRC_NAME = \
+SRC_NAME = main.c \
 	malloc.c free.c realloc.c show_alloc_mem.c
 AR = ar rc
 

@@ -12,13 +12,20 @@
 
 #include "ft_malloc.h"
 
-void 		*malloc(size_t size)
-{
-	(void)size;
-	return (void *)1;
+void		*ft_alloc(size_t size) {
+	void *map;
+
+	if ((map = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON |MAP_PRIVATE, -1, 0)) == MAP_FAILED)
+		return (NULL);
+	return (map);
 }
 
-int			main()
+void 		*malloc(size_t size)
 {
-	return (0);
+	if (size < 1)
+		return (NULL);
+	pthread_mutex_lock(&g_mutex);
+	pthread_mutex_unlock(&g_mutex);
+
+	return (NULL);
 }

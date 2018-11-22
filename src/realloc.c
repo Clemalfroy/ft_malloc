@@ -14,7 +14,10 @@
 
 void 		*realloc(void *ptr, size_t size)
 {
-    (void)ptr;
-    (void)size;
-    return (void *)1;
+    if (!ptr || size < 1)
+        return (NULL);
+    pthread_mutex_lock(&g_mutex);
+    //TODO: CODE HERE
+	pthread_mutex_unlock(&g_mutex);
+    return (NULL);
 }
