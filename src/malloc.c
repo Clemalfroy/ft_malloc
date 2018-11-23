@@ -18,7 +18,7 @@ static t_block	*get_unallocated_block(t_block *head, size_t size)
 
 	block = head;
 	while (block && (block->allocated ||
-	block->size < size))
+	block->size < size - BLOCK_SIZE))
 		block = block->next;
 	return (block);
 }
@@ -41,15 +41,21 @@ static t_block		*extend_zone(size_t size, t_block *zone)
 static int		create_block(size_t size, t_block *block)
 {
 	t_block	*tmp;
+	size_t	next_size;
 
 	if (!block || block->allocated)
 		return(0);
 	tmp = block->next;
 	block->next = (void*)block + size;
-	block->next->size = block->size - size;
-	block->next->next = tmp;
-	block->size = size - BLOCK_SIZE;
-	block->allocated = 1;
+	if ((next_size = block->size - size) == 0)
+		block->next = tmp;
+	else
+	{
+		block->next->size = block->size - size;
+		block->next->next = tmp;
+		block->size = size - BLOCK_SIZE;
+		block->allocated = 1;
+	}
 	return (1);
 }
 

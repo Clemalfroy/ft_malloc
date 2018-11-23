@@ -37,8 +37,6 @@ void 		*realloc(void *ptr, size_t size)
     }
     if (pthread_mutex_lock(&g_mutex) != 0)
 		return (NULL);
-    if (!get_mem())
-		return (NULL);
 	ret = ft_realloc(ptr, size);
 	if (pthread_mutex_unlock(&g_mutex) != 0)
 		return (NULL);      

@@ -42,5 +42,10 @@ int			main()
     malloc(111111) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
     ft_puts(1, "Malloc(1111111): ");
     malloc(1111111) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
+    ft_puts(1, "Malloc(11111111): ");
+    malloc(11111111) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
+    ft_puts(1, "Malloc(111111111): ");
+    malloc(111111111) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
+    show_alloc_mem();
 	return (0);
 }

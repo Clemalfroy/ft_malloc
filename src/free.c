@@ -18,8 +18,6 @@ void        free(void *ptr)
         return ;
     if (pthread_mutex_lock(&g_mutex) != 0)
 		return ;
-    if (!get_mem())
-		return ;
 	//TODO: CODE HERE
 	if (pthread_mutex_unlock(&g_mutex) != 0)
 		return ; 

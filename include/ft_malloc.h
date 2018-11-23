@@ -22,8 +22,8 @@
 # define TINY 128
 # define SMALL 1024
 # define PAGE_SIZE getpagesize()
-# define TINY_MIN ((((TINY * 100) / (PAGE_SIZE)) + 1) * PAGE_SIZE)
-# define SMALL_MIN ((((SMALL * 100) / (PAGE_SIZE)) + 1) * PAGE_SIZE)
+# define TINY_MIN (size_t)((((TINY * 100) / (PAGE_SIZE)) + 1) * PAGE_SIZE)
+# define SMALL_MIN (size_t)((((SMALL * 100) / (PAGE_SIZE)) + 1) * PAGE_SIZE)
 # define BLOCK_SIZE sizeof(struct s_block)
 # define BLOCK_DATA(b) (((void*)(b) + BLOCK_SIZE))
 # define IS_TINY(x) (((x)) <= (TINY))
