@@ -17,11 +17,30 @@
 
 int			main()
 {
-	t_block test;
+    char *str;
 
-	printf("%lu\n", sizeof(test));
-    assert(sizeof(test) == 32);
-    if (malloc(1) == NULL)
-        printf("Malloc Failed\n");
+    str = malloc(sizeof(char)*5);
+    str[0] = 'a';
+    str[1] = 'v';
+    str[2] = 'd';
+    str[3] = 'e';
+    str[4] = '\0';
+    ft_putf(1, "Test1: %s\n", str);
+    ft_puts(1, "Malloc(0): ");
+    malloc(0) == NULL ? ft_puts(1, "Success\n") :ft_puts(1, "Failed\n");
+    ft_puts(1, "Malloc(1): ");
+    malloc(1) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
+    ft_puts(1, "Malloc(11): ");
+    malloc(11) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
+    ft_puts(1, "Malloc(111): ");
+    malloc(111) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
+    ft_puts(1, "Malloc(1111): ");
+    malloc(1111) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
+    ft_puts(1, "Malloc(11111): ");
+    malloc(11111) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
+    ft_puts(1, "Malloc(111111): ");
+    malloc(111111) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
+    ft_puts(1, "Malloc(1111111): ");
+    malloc(1111111) == NULL ? ft_puts(1, "Failed\n") :ft_puts(1, "Success\n");
 	return (0);
 }
