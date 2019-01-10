@@ -1,179 +1,165 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cmalfroy <cmalfroy@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/11/07 09:52:36 by cmalfroy          #+#    #+#              #
-#    Updated: 2018/02/26 15:03:41 by mc               ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME =	libft.a
 
-PROJECT ?= libft
-WFLAGS = -Werror -Wextra -Wall
-WWFLAGS = $(WFLAGS) -Wpedantic -Wshadow -Wconversion -Wcast-align \
-  -Wstrict-prototypes -Wmissing-prototypes -Wunreachable-code -Winit-self \
-  -Wmissing-declarations -Wfloat-equal -Wbad-function-cast -Wundef \
-  -Waggregate-return -Wstrict-overflow=5 -Wold-style-definition -Wpadded \
-  -Wredundant-decls -Wall -Werror -Wextra
-RCFLAGS = $(WFLAGS) -O2
-DCFLAGS = $(WFLAGS) -g3 -DDEBUG
-SCFLAGS = $(DCFLAGS) -fsanitize=address,undefined -ferror-limit=5
-CC ?= gcc
+AR =		ar
+CC =		gcc
+AFLAGS =	rcus
+CFLAGS =	-Wall -Werror -Wextra -Ofast
 
-INC_PATH = include
-SRC_PATH = src
-OBJ_DIR ?= obj
-OBJ_PATH ?= $(OBJ_DIR)/rel
-3TH_PATH =
+DIR_OBJ =	./obj/
+PATH_INC =	./include/
+PATH_SUBD =	./ascii/ \
+			./io/ \
+			./list/ \
+			./memory/ \
+			./string/
+VPATH =	$(PATH_SUBD)
+INC_PATH =	$(patsubst %, -I %, $(PATH_INC))
 
-LIBS =
-ifneq (,$(findstring dev,$(PROJECT)))
-LIB_NAME = $(addsuffix .dev, $(LIBS))
-else ifneq (,$(findstring san,$(PROJECT)))
-LIB_NAME = $(addsuffix .san, $(LIBS))
-else
-LIB_NAME = $(LIBS)
-endif
-3TH_NAME =
-SRC_NAME = \
-	cty/cty.c cty/cty_2.c cty/cty_3.c \
-	ds/alloc.c ds/apd.c ds/at.c ds/aver.c ds/back.c ds/begin.c ds/clean.c \
-	ds/clr.c ds/cpush.c ds/cput.c ds/ctor.c ds/cusht.c ds/dtor.c ds/emp.c \
-	ds/end.c ds/grow.c ds/len.c ds/mpush.c ds/mput.c ds/musht.c ds/npop.c \
-	ds/npush.c ds/nput.c ds/nrem.c ds/nsht.c ds/nusht.c ds/pop.c ds/prd.c \
-	ds/push.c ds/put.c ds/rem.c ds/sht.c ds/usht.c ds/mdtor.c ds/map.c \
-	ds/map_2.c ds/set.c ds/set_2.c \
-	ex/ex.c ex/ex_2.c \
-	fs/fs.c fs/fs_2.c fs/fs_3.c fs/fs_4.c \
-	glob/globux.c glob/glob_match.c glob/glob_climb_tree.c \
-	glob/glob_util/glob_list.c glob/glob_util/glob_dir.c \
-	glob/glob_util/glob_is_magic.c glob/glob_util/glob_path.c \
-	glob/glob_util/glob_cmp.c glob/glob_util/glob_show.c \
-	glob/glob_util/glob_finder.c \
-	glob/glob_brace.c \
-	hash/hash.c hash/hash_2.c \
-	int/len.c int/str.c \
-	io/fcntl.c io/ifs.c io/ifs_2.c io/ofs.c io/ofs_2.c io/ofs_3.c io/padn.c \
-	io/putc.c io/putf.c io/putl.c io/putn.c io/puts.c \
-	lib/atoi.c lib/clean.c lib/dtor.c lib/getenv.c lib/itoa.c lib/join.c \
-	lib/strerr.c \
-	math/imax.c math/imin.c math/m4.c math/m4_mul.c math/m4_rot.c \
-	math/m4_trans.c math/pow.c math/pow2_next.c math/umax.c math/umin.c \
-	math/v3.c math/v3_2.c math/eq.c math/eq_2.c \
-	mem/alloc.c \
-	str/mem.c str/mem_2.c str/str.c str/str_2.c str/str_3.c str/str_4.c \
-	str/str_5.c str/str_6.c str/str_7.c \
-	bytes/endianness.c bytes/swap_int64.c bytes/left_rotate_32.c \
-	bytes/swap_int32.c bytes/right_rotate_32.c bytes/byte_padding.c \
-	getopt.c \
-	sort/ft_shellsort.c
+SRC_ASCII =		ft_isalnum.c \
+				ft_isalpha.c \
+				ft_isascii.c \
+				ft_isdigit.c \
+				ft_isprint.c \
+				ft_isblank.c \
+				ft_tolower.c \
+				ft_toupper.c
+SRC_IO =		ft_fputchar.c \
+				ft_fputendl.c \
+				ft_fputnbr.c \
+				ft_fputstr.c \
+				ft_putchar.c \
+				ft_putendl.c \
+				ft_putnbr.c \
+				ft_putstr.c \
+				gnl.c
+SRC_LIST =		ft_create_node.c \
+				ft_clear_list.c \
+				ft_node_push_back.c \
+				ft_node_push_front.c \
+				ft_node_push_after.c \
+				ft_go_start_list.c \
+				ft_go_end_list.c \
+				ft_list_size.c \
+				ft_add_list.c \
+				ft_bubblesort_list.c \
+				ft_insertsort_list.c \
+				ft_list_sort_rev.c \
+				ft_pop_node.c
+SRC_MEMORY =	ft_bzero.c \
+				ft_memalloc.c \
+				ft_memccpy.c \
+				ft_memchr.c \
+				ft_memcmp.c \
+				ft_memcpy.c \
+				ft_memdel.c \
+				ft_memmove.c \
+				ft_memset.c \
+				ft_malloc_tab_char.c \
+				ft_free_tab.c
+SRC_STRING =	ft_atoi.c \
+				ft_itoa.c \
+				ft_nbrlen.c \
+				ft_strcat.c \
+				ft_strchr.c \
+				ft_strclr.c \
+				ft_strcmp.c \
+				ft_strcpy.c \
+				ft_strdel.c \
+				ft_strdelpp.c \
+				ft_strdup.c \
+				ft_strequ.c \
+				ft_striter.c \
+				ft_striteri.c \
+				ft_strjoin.c \
+				ft_strstrjoin.c \
+				ft_strjoinchar.c \
+				ft_strlcat.c \
+				ft_strlen.c \
+				ft_strmap.c \
+				ft_strmapi.c \
+				ft_strncat.c \
+				ft_strncmp.c \
+				ft_strncpy.c \
+				ft_strnequ.c \
+				ft_strnew.c \
+				ft_strnstr.c \
+				ft_strrchr.c \
+				ft_strsplit.c \
+				ft_strseparate.c \
+				ft_strstr.c \
+				ft_strsub.c \
+				ft_perror.c \
+				ft_strtrim.c \
+				ft_exiterror.c \
+				ft_strfind.c \
+				ft_strfind_by_end.c \
+				ft_strcont.c \
+				ft_counttab.c
 
-3TH = $(addprefix $(3TH_PATH)/, $(3TH_NAME))
-OBJ = $(addprefix $(OBJ_PATH)/, $(SRC_NAME:.c=.o))
-LNK = $(addprefix -L, $(3TH))
-INC = $(addprefix -I, $(INC_PATH) $(addsuffix /include, $(3TH)))
-LIB = $(addprefix -l, $(LIB_NAME))
-DEP = $(OBJ:%.o=%.d)
+OBJ_ASCII =		$(patsubst %.c, $(DIR_OBJ)%.o, $(SRC_ASCII))
+OBJ_IO =		$(patsubst %.c, $(DIR_OBJ)%.o, $(SRC_IO))
+OBJ_LIST =		$(patsubst %.c, $(DIR_OBJ)%.o, $(SRC_LIST))
+OBJ_MEMORY =	$(patsubst %.c, $(DIR_OBJ)%.o, $(SRC_MEMORY))
+OBJ_STRING =	$(patsubst %.c, $(DIR_OBJ)%.o, $(SRC_STRING))
+DEP_OBJ =	ascii_msg \
+			$(OBJ_ASCII) \
+			io_msg \
+			$(OBJ_IO) \
+			list_msg \
+			$(OBJ_LIST) \
+			memory_msg \
+			$(OBJ_MEMORY) \
+			string_msg \
+			$(OBJ_STRING)
+OBJ =	$(OBJ_ASCII) \
+		$(OBJ_IO) \
+		$(OBJ_LIST) \
+		$(OBJ_MEMORY) \
+		$(OBJ_STRING)
 
-PRINTF=test $(VERBOSE)$(TRAVIS) || printf
+all: $(NAME)
 
-ifeq ($(OS), Windows_NT)
-  CCFLAGS += -D WIN32
-  ifeq ($(PROCESSOR_ARCHITECTURE), AMD64)
-    CCFLAGS += -D AMD64
-  else ifeq ($(PROCESSOR_ARCHITECTURE), x86)
-    CCFLAGS += -D IA32
-  endif
-else
-  UNAME_S = $(shell uname -s)
-  ifeq ($(UNAME_S), Linux)
-    CCFLAGS += -D LINUX
-  else ifeq ($(UNAME_S), Darwin)
-    CCFLAGS += -D OSX
-  endif
-  UNAME_P = $(shell uname -p)
-  ifeq ($(UNAME_P), unknown)
-    UNAME_P = $(shell uname -m)
-  endif
-  ifeq ($(UNAME_P), x86_64)
-    CCFLAGS += -D AMD64
-  else ifneq ($(filter %86, $(UNAME_P)), )
-    CCFLAGS += -D IA32
-  else ifneq ($(filter arm%, $(UNAME_P)), )
-    CCFLAGS += -D ARM
-  endif
-endif
+$(NAME): assemble mkobjdir $(DEP_OBJ)
+	@ /bin/echo -n "Archiving objects in $(NAME):"
+	@ $(AR) $(AFLAGS) $(NAME) $(OBJ)
+	@ echo " \033[32mAll done!\033[0m"
 
-all:
-ifneq ($(3TH_NAME),)
-	+$(foreach 3th,$(3TH_NAME),$(MAKE) -C $(3TH_PATH)/$(3th) &&) true
-endif
-	@$(PRINTF) "%-20s" "$(PROJECT).a: lib"
-	+$(MAKE) -j4 $(PROJECT).a "CFLAGS = $(RCFLAGS)" "OBJ_PATH = $(OBJ_DIR)/rel"
-	@$(PRINTF) "\r\x1b[20C\x1b[0K\x1b[32m✔\x1b[0m\n"
-
-dev:
-ifneq ($(3TH_NAME),)
-	+$(foreach 3th,$(3TH_NAME),$(MAKE) -C $(3TH_PATH)/$(3th) dev &&) true
-endif
-	@$(PRINTF) "%-20s" "$(PROJECT).dev: exe"
-	+$(MAKE) -j4 $(PROJECT).dev.a "PROJECT = $(PROJECT).dev" "CFLAGS = $(DCFLAGS)" \
-	  "OBJ_PATH = $(OBJ_DIR)/dev"
-	@$(PRINTF) "\r\x1b[20C\x1b[0K\x1b[32m✔\x1b[0m\n"
-
-san:
-ifneq ($(3TH_NAME),)
-	+$(foreach 3th,$(3TH_NAME),$(MAKE) -C $(3TH_PATH)/$(3th) san &&) true
-endif
-	@$(PRINTF) "%-20s" "$(PROJECT).san: exe"
-	+$(MAKE) -j4 $(PROJECT).san.a "PROJECT = $(PROJECT).san" "CFLAGS = $(SCFLAGS)" \
-	  "OBJ_PATH = $(OBJ_DIR)/san" "CC = clang"
-	@$(PRINTF) "\r\x1b[20C\x1b[0K\x1b[32m✔\x1b[0m\n"
-
-mecry:
-ifneq ($(3TH_NAME),)
-	+$(foreach 3th,$(3TH_NAME),$(MAKE) -C $(3TH_PATH)/$(3th) mecry &&) true
-endif
-	@$(PRINTF) "%-20s" "$(PROJECT).a: make me cry.."
-	+$(MAKE) -j4 $(PROJECT).a "CFLAGS = $(WWFLAGS)" "OBJ_PATH = $(OBJ_DIR)/rel"
-	@$(PRINTF) "\r\x1b[20C\x1b[0K\x1b[32m✔\x1b[0m\n"
-
-$(PROJECT).a: $(OBJ)
-	@$(PRINTF) "\r\x1b[20C\x1b[0K$@"
-	ar -rc $(PROJECT).a $(OBJ)
-	ranlib $(PROJECT).a
-
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
-	@$(PRINTF) "\r\x1b[20C\x1b[0K$<"
-	$(CC) $(CFLAGS) $(INC) -MMD -MP -c $< -o $@
-
-$(OBJ_PATH):
-	mkdir -p $(dir $(OBJ))
+$(DIR_OBJ)%.o: %.c
+	@ /bin/echo -n "	$(notdir $@)"
+	@ $(CC) $(CFLAGS) -c -o $@ $< $(INC_PATH)
+	@ echo " \033[32mOK\033[0m"
 
 clean:
-	rm -f $(OBJ) $(DEP)
-	rm -f $(OBJ:$(OBJ_DIR)/rel%=$(OBJ_DIR)/dev%) $(DEP:$(OBJ_DIR)/rel%=$(OBJ_DIR)/dev%)
-	rm -f $(OBJ:$(OBJ_DIR)/rel%=$(OBJ_DIR)/san%) $(DEP:$(OBJ_DIR)/rel%=$(OBJ_DIR)/san%)
-	@$(PRINTF) "%-20s\033[32m✔\033[0m\n" "$(PROJECT): $@"
+	@ /bin/echo -n "Removing object files:"
+	@ rm -rf $(DIR_OBJ)
+	@ echo " \033[32mdone\033[0m"
 
 fclean: clean
-ifneq ($(3TH_NAME),)
-	+$(foreach 3th,$(3TH_NAME),$(MAKE) -C $(3TH_PATH)/$(3th) fclean &&) true
-endif
-	test -d $(OBJ_DIR) && find $(OBJ_DIR) -type d | sort -r | xargs rmdir || true
-	rm -f $(PROJECT){,.san,.dev}.a
-	@$(PRINTF) "%-20s\033[32m✔\033[0m\n" "$(PROJECT): $@"
+	@ /bin/echo -n "Removing library:"
+	@ rm -rf $(NAME)
+	@ echo " \033[32mdone\033[0m"
 
-re: clean all
+re: fclean all
 
--include $(DEP)
+mkobjdir:
+	@ mkdir -p $(DIR_OBJ)
 
-ifndef VERBOSE
- ifndef TRAVIS
-.SILENT:
- endif
-endif
+assemble:
+	@ echo "Assembling:"
 
-.PHONY: all, dev, san, mecry, $(PROJECT).a, clean, fclean, re
+ascii_msg:
+	@ echo "  ASCII functions:"
+
+io_msg:
+	@ echo "  I/O functions:"
+
+list_msg:
+	@ echo "  list functions:"
+
+memory_msg:
+	@ echo "  memory functions:"
+
+string_msg:
+	@ echo "  string functions:"
+
+.PHONY: clean fclean re

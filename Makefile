@@ -1,76 +1,51 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cmalfroy <cmalfroy@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/11/07 09:52:36 by cmalfroy          #+#    #+#              #
-#    Updated: 2018/02/20 12:04:56 by cmalfroy         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-.PHONY: all, clean, fclean, re
+ifeq ($(HOSTTYPE),)
+	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+endif
 
 NAME = ft_malloc
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
-LIB = libft
+INCLUDE_DIR = ./includes
 
-LDFLAGS = -Llibft
+DIR_LIB = ./libft/
 
-LDLIBS = -lft
+SRC_DIR = ./srcs/
 
-SRC_PATH = src
+FILES = malloc.c \
+		utils.c \
+		free.c \
+		show_alloc_mem.c \
+		realloc.c \
+		calloc.c
 
-SRC_NAME = main.c \
-	malloc.c free.c realloc.c show_alloc_mem.c calloc.c \
-	utils.c
+SRCS = $(addprefix $(SRC_DIR), $(FILES))
 
-AR = ar rc
+all:
+	@ make -C $(DIR_LIB)
+	@ $(CC) $(CFLAGS) -shared -o libft_malloc_$(HOSTTYPE).so $(SRCS) -L $(DIR_LIB) -lft -lpthread -I $(INCLUDE_DIR)
+	@ echo "Library created: \033[32mlibft_malloc_$(HOSTTYPE).so\033[0m"
+	@ ln -s libft_malloc_$(HOSTTYPE).so libft_malloc.so
+	@ echo "Link file created: \033[32mlibft_malloc.so\033[0m"
+	@ echo "\033[32mAll done!\033[0m"
 
-INC_LIB = -I libft/include
-
-CPPFLAGS = -I include
-
-OBJ_PATH = obj
-
-OBJ_NAME = $(SRC_NAME:.c=.o)
-
-
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-
-OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-
-all: $(NAME) $(NAME2)
-
-$(NAME): $(OBJ)
-	@make -C $(LIB)
-	@echo $(NAME) ": Sources compiling..."
-	@$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
-	@echo "Executable "$(NAME)" made"
-
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	@mkdir -p $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(INC_LIB) -o $@ -c $<
+test:
+	@ make -C $(DIR_LIB)
+	@ $(CC) $(CFLAGS) $(SRCS) -I$(INCLUDE_DIR) -o ft_malloc -L ./libft/ -lft -lpthread -g
+	@ echo "test binary created"
 
 clean:
-	@make fclean -C $(LIB)
-	@rm -f $(OBJ)
-	@rm -rf $(OBJ_PATH) || true
-	@rm -rf $(OBJ_PATH2) || true
-	@echo $(OBJ_PATH)" supprimé !"
+	@ make clean -C $(DIR_LIB)
+	@ rm libft_malloc.so
+	@ echo "\033[32mLink file removed\033[0m"
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "Executable de "$(NAME)" supprimé !"
+	@ make fclean -C $(DIR_LIB)
+	@ rm libft_malloc_$(HOSTTYPE).so
+	@ echo "\033[32mLibrary removed\033[0m"
 
 re: fclean all
-	@echo "Make re done !"
 
-norme:
-	norminette $(SRC)
-	norminette $(INC_PATH)
+.PHONY : all clean fclean re
