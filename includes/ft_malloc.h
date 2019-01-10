@@ -6,7 +6,7 @@
 /*   By: cmalfroy <cmalfroy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 14:22:05 by cmalfroy          #+#    #+#             */
-/*   Updated: 2018/08/23 20:35:13 by cmalfroy         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:43:52 by cmalfroy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct		s_mem
 /*
  ** Basic functions
 */
-
 
 void				free(void *ptr);
 void				*malloc(size_t size);
